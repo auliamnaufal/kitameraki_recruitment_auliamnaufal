@@ -11,6 +11,7 @@ import {
   taskListStyles,
 } from "./AppStyles";
 import { SubmitHandler } from "react-hook-form";
+import { fields } from "./components/TaskForm/TaskFormData";
 
 export interface Task {
   id: number;
@@ -65,7 +66,7 @@ const App = () => {
       tokens={innerStackTokens}
     >
       <Stack.Item disableShrink styles={nonShrinkingStackItemStyles}>
-        <TaskForm onSubmit={onSubmit} />
+        <TaskForm fields={fields} onSubmit={onSubmit} />
       </Stack.Item>
       <Stack.Item grow styles={taskListStyles}>
         <TaskList tasks={tasks} onSelected={onSelected} />

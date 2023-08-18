@@ -1,71 +1,43 @@
-import React, { useState } from "react";
-import { PrimaryButton, Stack, Text, TextField } from "@fluentui/react";
-import { Task } from "../../App";
-
+import { FormProvider, useForm } from "react-hook-form";
+import { DynamicFieldData } from "../../dynamic-control-types";
+import { DynamicControl } from "./DynamicControl";
+import "./style.css";
+import { PrimaryButton, TextField } from "@fluentui/react";
+import { ErrorMessage } from "@hookform/error-message";
 interface Props {
-  onSubmit: (data: Task) => void;
+  fields: DynamicFieldData[];
+  onSubmit: (data: any) => void;
 }
 
-const TaskForm = ({ onSubmit }: Props) => {
-  const [formData, setFormData] = useState<Task>({
-    id: 0,
-    title: "",
-    description: "",
-  });
-
-  const handleInputChange = (
-    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.currentTarget;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleFormSubmit = () => {
-    onSubmit(formData);
-    setFormData({
-      id: 0,
-      title: "",
-      description: "",
-    });
-  };
+const TaskForm = ({ fields, onSubmit }: Props) => {
+  const formMethods = useForm();
+  const {
+    handleSubmit,
+    reset,
+    formState: { isSubmitting, errors },
+  } = formMethods;
 
   return (
-    <Stack>
-      <Text variant="xxLarge">Create New Task</Text>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleFormSubmit();
-        }}
-      >
-        <Stack>
-          <TextField
-            label="Title"
-            required
-            name="title"
-            value={formData.title}
-            onChange={handleInputChange}
-          />
-          <TextField
-            label="Description"
-            multiline
-            rows={3}
-            name="description"
-            value={formData.description}
-            onChange={handleInputChange}
-          />
-        </Stack>
-        <PrimaryButton
-          type="submit"
-          text="Create"
-          allowDisabledFocus
-          style={{ marginTop: 20 }}
-        />
-      </form>
-    </Stack>
+    <form
+      onSubmit={handleSubmit((data) => {
+        onSubmit(data);
+        reset();
+      })}
+      style={{ width: "100%" }}
+    >
+      <FormProvider {...formMethods}>
+        {fields.map((d, i) => (
+          <div key={i} className="custom-input">
+            <label htmlFor={d.fieldName}>{d.label}</label>
+            <DynamicControl {...d} />
+            <ErrorMessage errors={errors} name={d.fieldName} />
+          </div>
+        ))}
+      </FormProvider>
+      <PrimaryButton type="submit" disabled={isSubmitting}>
+        Create
+      </PrimaryButton>
+    </form>
   );
 };
 
