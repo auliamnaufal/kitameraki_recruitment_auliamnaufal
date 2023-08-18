@@ -6,15 +6,17 @@ import {
   Stack,
 } from "@fluentui/react";
 import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
 
 const stackItemStyles: IStackItemStyles = {
   root: {
-    alignItems: "center",
+    alignItems: "start",
     background: DefaultPalette.themeLighter,
     color: DefaultPalette.black,
     display: "flex",
     height: "100vh",
-    justifyContent: "center",
+    width: "100%",
+    justifyContent: "start",
     overflow: "hidden",
   },
 };
@@ -56,7 +58,7 @@ const App = () => {
         <TaskForm />
       </Stack.Item>
       <Stack.Item grow styles={stackItemStyles}>
-        I shrink
+        <TaskList />
       </Stack.Item>
       <Stack.Item grow styles={stackItemStyles}>
         I shrink
