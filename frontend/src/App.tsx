@@ -1,66 +1,15 @@
-import {
-  DefaultPalette,
-  IStackItemStyles,
-  IStackStyles,
-  IStackTokens,
-  Stack,
-} from "@fluentui/react";
-import TaskForm from "./components/TaskForm";
-import TaskList from "./components/TaskList";
+import { Stack } from "@fluentui/react";
+import TaskForm from "./components/TaskForm/TaskForm";
+import TaskList from "./components/TaskList/TaskList";
 import { useState } from "react";
-import TaskDetail from "./components/TaskDetail";
-
-const taskListStyles: IStackItemStyles = {
-  root: {
-    alignItems: "start",
-    background: DefaultPalette.themeLighter,
-    color: DefaultPalette.black,
-    display: "flex",
-    height: "calc(100vh - 40px)",
-    width: "100%",
-    justifyContent: "start",
-    overflow: "hidden",
-    padding: "20px 0",
-  },
-};
-const taskDetailStyles: IStackItemStyles = {
-  root: {
-    alignItems: "start",
-    background: DefaultPalette.themeLighter,
-    color: DefaultPalette.black,
-    display: "flex",
-    height: "calc(100vh - 40px)",
-    width: "100%",
-    justifyContent: "start",
-    overflow: "hidden",
-    padding: "20px",
-  },
-};
-const nonShrinkingStackItemStyles: IStackItemStyles = {
-  root: {
-    alignItems: "start",
-    background: DefaultPalette.themeLighter,
-    color: DefaultPalette.black,
-    display: "flex",
-    height: "calc(100vh - 40px)",
-    justifyContent: "start",
-    overflow: "hidden",
-    width: 500,
-    padding: "20px",
-  },
-};
-
-// Tokens definition
-const innerStackTokens: IStackTokens = {
-  childrenGap: 5,
-};
-
-const stackStyles: IStackStyles = {
-  root: {
-    background: DefaultPalette.themeLighterAlt,
-    overflow: "hidden",
-  },
-};
+import TaskDetail from "./components/TaskDetail/TaskDetail";
+import {
+  innerStackTokens,
+  nonShrinkingStackItemStyles,
+  stackStyles,
+  taskDetailStyles,
+  taskListStyles,
+} from "./AppStyles";
 
 export interface Task {
   id: number;
@@ -68,33 +17,34 @@ export interface Task {
   description: string;
 }
 
+const items: Task[] = [
+  {
+    id: 1,
+    name: "List 1",
+    description:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
+  },
+  {
+    id: 2,
+    name: "List 2",
+    description:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
+  },
+  {
+    id: 3,
+    name: "List 3",
+    description:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
+  },
+  {
+    id: 4,
+    name: "List 4",
+    description:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
+  },
+];
+
 const App = () => {
-  const items: Task[] = [
-    {
-      id: 1,
-      name: "List 1",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
-    },
-    {
-      id: 2,
-      name: "List 2",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
-    },
-    {
-      id: 3,
-      name: "List 3",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
-    },
-    {
-      id: 4,
-      name: "List 4",
-      description:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
-    },
-  ];
   const [tasks, setTasks] = useState<Task[]>(items);
   const [selectedTask, setSelectedTask] = useState<Task | undefined>(undefined);
 

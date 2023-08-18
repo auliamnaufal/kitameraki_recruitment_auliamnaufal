@@ -1,16 +1,6 @@
 import { IStackStyles, IStackTokens, Stack, Text } from "@fluentui/react";
-import { Task } from "../App";
-
-const innerStackTokens: IStackTokens = {
-  childrenGap: 10,
-};
-
-const stackStyles: IStackStyles = {
-  root: {
-    overflow: "hidden",
-    width: "100%",
-  },
-};
+import { Task } from "../../App";
+import { innerStackTokens, stackStyles } from "./styles";
 
 interface Props {
   task: Task | undefined;

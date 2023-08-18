@@ -6,17 +6,7 @@ import {
   Text,
   TextField,
 } from "@fluentui/react";
-
-const innerStackTokens: IStackTokens = {
-  childrenGap: 10,
-};
-
-const stackStyles: IStackStyles = {
-  root: {
-    overflow: "hidden",
-    width: "100%",
-  },
-};
+import { innerStackTokens, stackStyles } from "./styles";
 
 const TaskForm = () => {
   return (

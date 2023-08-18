@@ -1,6 +1,6 @@
 import { FocusZone, FocusZoneDirection } from "@fluentui/react";
-import TaskItem from "./TaskItem";
-import { Task } from "../App";
+import TaskItem from "../TaskItem/TaskItem";
+import { Task } from "../../App";
 
 interface Props {
   tasks: Task[];
