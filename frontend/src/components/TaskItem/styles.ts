@@ -3,6 +3,7 @@ import {
   getFocusStyle,
   getTheme,
   mergeStyleSets,
+  mergeStyles,
 } from "@fluentui/react";
 
 const theme: ITheme = getTheme();

@@ -58,6 +58,11 @@ const App = () => {
     setTasks([...tasks, { ...data, id: Math.random() }]);
   };
 
+  const onDelete = (id: any) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+    setSelectedTask(undefined);
+  };
+
   return (
     <Stack
       enableScopedSelectors
@@ -72,7 +77,7 @@ const App = () => {
         <TaskList tasks={tasks} onSelected={onSelected} />
       </Stack.Item>
       <Stack.Item grow styles={taskDetailStyles}>
-        <TaskDetail task={selectedTask} />
+        <TaskDetail onDelete={onDelete} task={selectedTask} />
       </Stack.Item>
     </Stack>
   );

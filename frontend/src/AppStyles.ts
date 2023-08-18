@@ -40,7 +40,7 @@ export const nonShrinkingStackItemStyles: IStackItemStyles = {
     height: "calc(100vh - 40px)",
     justifyContent: "start",
     overflow: "hidden",
-    width: 500,
+    width: 350,
     padding: "20px",
   },
 };
