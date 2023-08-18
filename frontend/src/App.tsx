@@ -8,6 +8,7 @@ import {
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 import { useState } from "react";
+import TaskDetail from "./components/TaskDetail";
 
 const stackItemStyles: IStackItemStyles = {
   root: {
@@ -15,10 +16,11 @@ const stackItemStyles: IStackItemStyles = {
     background: DefaultPalette.themeLighter,
     color: DefaultPalette.black,
     display: "flex",
-    height: "100vh",
+    height: "calc(100vh - 40px)",
     width: "100%",
     justifyContent: "start",
     overflow: "hidden",
+    padding: "20px",
   },
 };
 const nonShrinkingStackItemStyles: IStackItemStyles = {
@@ -27,11 +29,11 @@ const nonShrinkingStackItemStyles: IStackItemStyles = {
     background: DefaultPalette.themeLighter,
     color: DefaultPalette.black,
     display: "flex",
-    height: "100vh",
+    height: "calc(100vh - 40px)",
     justifyContent: "start",
     overflow: "hidden",
     width: 500,
-    padding: 20,
+    padding: "20px",
   },
 };
 
@@ -81,7 +83,7 @@ const App = () => {
     },
   ];
   const [tasks, setTasks] = useState<Task[]>(items);
-  const [selectedTask, setSelectedTask] = useState<Task>();
+  const [selectedTask, setSelectedTask] = useState<Task | undefined>(undefined);
 
   const onSelected = (id: number) => {
     setSelectedTask(tasks.find((task) => task.id === id));
@@ -101,7 +103,7 @@ const App = () => {
         <TaskList tasks={tasks} onSelected={onSelected} />
       </Stack.Item>
       <Stack.Item grow styles={stackItemStyles}>
-        I shrink
+        <TaskDetail task={selectedTask} />
       </Stack.Item>
     </Stack>
   );
