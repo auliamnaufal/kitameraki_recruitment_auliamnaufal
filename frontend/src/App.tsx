@@ -63,6 +63,10 @@ const App = () => {
     setSelectedTask(undefined);
   };
 
+  const onTaskUpdate = (data: Task) => {
+    setTasks(tasks.map((task) => (task.id === data.id ? data : task)));
+  };
+
   return (
     <Stack
       enableScopedSelectors
@@ -77,7 +81,12 @@ const App = () => {
         <TaskList tasks={tasks} onSelected={onSelected} />
       </Stack.Item>
       <Stack.Item grow styles={taskDetailStyles}>
-        <TaskDetail onDelete={onDelete} task={selectedTask} />
+        <TaskDetail
+          onDelete={onDelete}
+          task={selectedTask}
+          fields={fields}
+          onUpdate={onTaskUpdate}
+        />
       </Stack.Item>
     </Stack>
   );
