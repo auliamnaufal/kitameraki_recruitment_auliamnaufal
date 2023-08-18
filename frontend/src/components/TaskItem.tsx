@@ -42,29 +42,20 @@ const classNames = mergeStyleSets({
   itemName: [
     fonts.xLarge,
     {
+      margin: 0,
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "ellipsis",
     },
   ],
-  itemIndex: {
-    fontSize: fonts.small.fontSize,
-    color: palette.neutralTertiary,
-    marginBottom: 10,
-  },
-  chevron: {
-    alignSelf: "center",
-    marginLeft: 10,
-    color: palette.neutralTertiary,
-    fontSize: fonts.large.fontSize,
-    flexShrink: 0,
-  },
 });
 
 interface Props {
   item: Task;
   onSelected: (id: number) => void;
 }
+
+const descriptionLength: number = 100;
 
 const TaskItem = ({ item: { id, name, description }, onSelected }: Props) => {
   return (
@@ -74,8 +65,12 @@ const TaskItem = ({ item: { id, name, description }, onSelected }: Props) => {
       data-is-focusable={true}
     >
       <div className={classNames.itemContent}>
-        <div className={classNames.itemName}>{name}</div>
-        <div>{description}</div>
+        <h3 className={classNames.itemName}>{name}</h3>
+        <p style={{ margin: "5px 0 0 0" }}>
+          {description.length > descriptionLength
+            ? description.slice(0, descriptionLength) + "..."
+            : description}
+        </p>
       </div>
     </div>
   );

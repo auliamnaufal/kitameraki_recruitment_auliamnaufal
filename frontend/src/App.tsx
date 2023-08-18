@@ -10,7 +10,20 @@ import TaskList from "./components/TaskList";
 import { useState } from "react";
 import TaskDetail from "./components/TaskDetail";
 
-const stackItemStyles: IStackItemStyles = {
+const taskListStyles: IStackItemStyles = {
+  root: {
+    alignItems: "start",
+    background: DefaultPalette.themeLighter,
+    color: DefaultPalette.black,
+    display: "flex",
+    height: "calc(100vh - 40px)",
+    width: "100%",
+    justifyContent: "start",
+    overflow: "hidden",
+    padding: "20px 0",
+  },
+};
+const taskDetailStyles: IStackItemStyles = {
   root: {
     alignItems: "start",
     background: DefaultPalette.themeLighter,
@@ -99,10 +112,10 @@ const App = () => {
       <Stack.Item disableShrink styles={nonShrinkingStackItemStyles}>
         <TaskForm />
       </Stack.Item>
-      <Stack.Item grow styles={stackItemStyles}>
+      <Stack.Item grow styles={taskListStyles}>
         <TaskList tasks={tasks} onSelected={onSelected} />
       </Stack.Item>
-      <Stack.Item grow styles={stackItemStyles}>
+      <Stack.Item grow styles={taskDetailStyles}>
         <TaskDetail task={selectedTask} />
       </Stack.Item>
     </Stack>
