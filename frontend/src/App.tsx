@@ -10,35 +10,36 @@ import {
   taskDetailStyles,
   taskListStyles,
 } from "./AppStyles";
+import { SubmitHandler } from "react-hook-form";
 
 export interface Task {
   id: number;
-  name: string;
+  title: string;
   description: string;
 }
 
 const items: Task[] = [
   {
     id: 1,
-    name: "List 1",
+    title: "List 1",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
   },
   {
     id: 2,
-    name: "List 2",
+    title: "List 2",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
   },
   {
     id: 3,
-    name: "List 3",
+    title: "List 3",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
   },
   {
     id: 4,
-    name: "List 4",
+    title: "List 4",
     description:
       "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
   },
@@ -52,6 +53,10 @@ const App = () => {
     setSelectedTask(tasks.find((task) => task.id === id));
   };
 
+  const onSubmit: SubmitHandler<Task> = (data) => {
+    setTasks([...tasks, { ...data, id: Math.random() }]);
+  };
+
   return (
     <Stack
       enableScopedSelectors
@@ -60,7 +65,7 @@ const App = () => {
       tokens={innerStackTokens}
     >
       <Stack.Item disableShrink styles={nonShrinkingStackItemStyles}>
-        <TaskForm />
+        <TaskForm onSubmit={onSubmit} />
       </Stack.Item>
       <Stack.Item grow styles={taskListStyles}>
         <TaskList tasks={tasks} onSelected={onSelected} />

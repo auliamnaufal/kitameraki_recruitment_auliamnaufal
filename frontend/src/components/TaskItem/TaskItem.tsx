@@ -8,7 +8,7 @@ interface Props {
 
 const descriptionLength: number = 100;
 
-const TaskItem = ({ item: { id, name, description }, onSelected }: Props) => {
+const TaskItem = ({ item: { id, title, description }, onSelected }: Props) => {
   return (
     <div
       onClick={() => onSelected(id)}
@@ -16,7 +16,7 @@ const TaskItem = ({ item: { id, name, description }, onSelected }: Props) => {
       data-is-focusable={true}
     >
       <div className={classNames.itemContent}>
-        <h3 className={classNames.itemName}>{name}</h3>
+        <h3 className={classNames.itemName}>{title}</h3>
         <p style={{ margin: "5px 0 0 0" }}>
           {description.length > descriptionLength
             ? description.slice(0, descriptionLength) + "..."

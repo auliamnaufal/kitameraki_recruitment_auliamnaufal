@@ -14,7 +14,7 @@ export const taskListStyles: IStackItemStyles = {
     height: "calc(100vh - 40px)",
     width: "100%",
     justifyContent: "start",
-    overflow: "hidden",
+    overflow: "auto",
     padding: "20px 0",
   },
 };

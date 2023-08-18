@@ -1,21 +1,62 @@
-import {
-  IStackStyles,
-  IStackTokens,
-  PrimaryButton,
-  Stack,
-  Text,
-  TextField,
-} from "@fluentui/react";
-import { innerStackTokens, stackStyles } from "./styles";
+import React, { useState } from "react";
+import { PrimaryButton, Stack, Text, TextField } from "@fluentui/react";
+import { Task } from "../../App";
 
-const TaskForm = () => {
+interface Props {
+  onSubmit: (data: Task) => void;
+}
+
+const TaskForm = ({ onSubmit }: Props) => {
+  const [formData, setFormData] = useState<Task>({
+    id: 0,
+    title: "",
+    description: "",
+  });
+
+  const handleInputChange = (
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.currentTarget;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleFormSubmit = () => {
+    onSubmit(formData);
+    setFormData({
+      id: 0,
+      title: "",
+      description: "",
+    });
+  };
+
   return (
-    <Stack styles={stackStyles} tokens={innerStackTokens}>
+    <Stack>
       <Text variant="xxLarge">Create New Task</Text>
-      <form>
-        <Stack styles={stackStyles} tokens={innerStackTokens}>
-          <TextField label="Title" required />
-          <TextField label="Description" multiline rows={3} />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleFormSubmit();
+        }}
+      >
+        <Stack>
+          <TextField
+            label="Title"
+            required
+            name="title"
+            value={formData.title}
+            onChange={handleInputChange}
+          />
+          <TextField
+            label="Description"
+            multiline
+            rows={3}
+            name="description"
+            value={formData.description}
+            onChange={handleInputChange}
+          />
         </Stack>
         <PrimaryButton
           type="submit"

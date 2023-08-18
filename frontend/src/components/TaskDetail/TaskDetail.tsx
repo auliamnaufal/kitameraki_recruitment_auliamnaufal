@@ -15,7 +15,7 @@ const TaskDetail = ({ task }: Props) => {
             No Task Selected
           </Text>
         )}
-        <Text variant="xxLarge">{task?.name}</Text>
+        <Text variant="xxLarge">{task?.title}</Text>
         <Text variant="medium">{task?.description}</Text>
       </Stack>
     </>
