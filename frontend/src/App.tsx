@@ -57,7 +57,7 @@ const innerStackTokens: IStackTokens = {
 
 const stackStyles: IStackStyles = {
   root: {
-    background: DefaultPalette.themeLight,
+    background: DefaultPalette.themeLighterAlt,
     overflow: "hidden",
   },
 };

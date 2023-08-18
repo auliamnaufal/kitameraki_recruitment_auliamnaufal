@@ -1,5 +1,4 @@
 import {
-  DefaultPalette,
   IStackStyles,
   IStackTokens,
   PrimaryButton,
@@ -29,6 +28,7 @@ const TaskForm = () => {
           <TextField label="Description" multiline rows={3} />
         </Stack>
         <PrimaryButton
+          type="submit"
           text="Create"
           allowDisabledFocus
           style={{ marginTop: 20 }}

@@ -1,11 +1,4 @@
-import {
-  IStackStyles,
-  IStackTokens,
-  PrimaryButton,
-  Stack,
-  Text,
-  TextField,
-} from "@fluentui/react";
+import { IStackStyles, IStackTokens, Stack, Text } from "@fluentui/react";
 import { Task } from "../App";
 
 const innerStackTokens: IStackTokens = {
@@ -25,10 +18,17 @@ interface Props {
 
 const TaskDetail = ({ task }: Props) => {
   return (
-    <Stack styles={stackStyles} tokens={innerStackTokens}>
-      <Text variant="xxLarge">{task?.name}</Text>
-      <Text variant="medium">{task?.description}</Text>
-    </Stack>
+    <>
+      <Stack styles={stackStyles} tokens={innerStackTokens}>
+        {!task && (
+          <Text variant="large" style={{ width: "max-content" }}>
+            No Task Selected
+          </Text>
+        )}
+        <Text variant="xxLarge">{task?.name}</Text>
+        <Text variant="medium">{task?.description}</Text>
+      </Stack>
+    </>
   );
 };
 

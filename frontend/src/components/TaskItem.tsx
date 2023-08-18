@@ -7,7 +7,7 @@ import {
 import { Task } from "../App";
 
 const theme: ITheme = getTheme();
-const { palette, semanticColors, fonts } = theme;
+const { palette, fonts } = theme;
 
 const classNames = mergeStyleSets({
   itemCell: [
@@ -18,7 +18,7 @@ const classNames = mergeStyleSets({
       minHeight: 54,
       padding: 10,
       boxSizing: "border-box",
-      _borderBottom: `1px solid ${semanticColors.bodyDivider}`,
+      _borderBottom: `1px solid ${palette.themeLight}`,
       get borderBottom() {
         return this._borderBottom;
       },
@@ -27,7 +27,7 @@ const classNames = mergeStyleSets({
       },
       display: "flex",
       selectors: {
-        "&:hover": { background: palette.neutralLight },
+        "&:hover": { background: palette.themeLight },
       },
       cursor: "pointer",
     },
