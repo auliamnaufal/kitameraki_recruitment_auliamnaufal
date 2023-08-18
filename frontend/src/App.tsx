@@ -1,7 +1,7 @@
 import { Stack } from "@fluentui/react";
 import TaskForm from "./components/TaskForm/TaskForm";
 import TaskList from "./components/TaskList/TaskList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaskDetail from "./components/TaskDetail/TaskDetail";
 import {
   innerStackTokens,
@@ -12,6 +12,7 @@ import {
 } from "./AppStyles";
 import { SubmitHandler } from "react-hook-form";
 import { fields } from "./components/TaskForm/TaskFormData";
+import axios from "axios";
 
 export interface Task {
   id: number;
@@ -19,35 +20,8 @@ export interface Task {
   description: string;
 }
 
-const items: Task[] = [
-  {
-    id: 1,
-    title: "List 1",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
-  },
-  {
-    id: 2,
-    title: "List 2",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
-  },
-  {
-    id: 3,
-    title: "List 3",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
-  },
-  {
-    id: 4,
-    title: "List 4",
-    description:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi quisquam explicabo laboriosam quibusdam veritatis odio quo, hic aliquid exercitationem? Suscipit illo sit nesciunt mollitia ex quibusdam. Pariatur quas dolorum perspiciatis.",
-  },
-];
-
 const App = () => {
-  const [tasks, setTasks] = useState<Task[]>(items);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTask, setSelectedTask] = useState<Task | undefined>(undefined);
 
   const onSelected = (id: number) => {
@@ -66,6 +40,12 @@ const App = () => {
   const onTaskUpdate = (data: Task) => {
     setTasks(tasks.map((task) => (task.id === data.id ? data : task)));
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/tasks")
+      .then((res) => setTasks(res.data.data.results));
+  }, []);
 
   return (
     <Stack
