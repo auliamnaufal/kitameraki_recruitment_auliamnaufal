@@ -2,10 +2,20 @@ const { nanoid } = require("nanoid");
 const tasks = require("./task");
 
 const getAllTasksHandler = (request, h) => {
+  const { perPage } = request.query;
+
+  console.log(perPage);
+
+  let slicedTasks = tasks;
+
+  if (perPage) {
+    slicedTasks = slicedTasks.slice(0, perPage);
+  }
+
   const response = h.response({
     status: "success",
     data: {
-      results: tasks.map((task) => ({
+      results: slicedTasks.map((task) => ({
         id: task.id,
         title: task.title,
         description: task.description,

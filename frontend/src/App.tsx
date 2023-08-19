@@ -1,7 +1,7 @@
 import { Stack } from "@fluentui/react";
 import TaskForm from "./components/TaskForm/TaskForm";
 import TaskList from "./components/TaskList/TaskList";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TaskDetail from "./components/TaskDetail/TaskDetail";
 import {
   innerStackTokens,
@@ -26,6 +26,9 @@ export interface Task {
 const App = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTask, setSelectedTask] = useState<Task | undefined>(undefined);
+  const [perPage, setPerPage] = useState(10);
+  const [prevY, setPrevY] = useState(0);
+  const taskListRef = useRef(null);
 
   const onSelected = (id: number) => {
     setSelectedTask(tasks.find((task) => task.id === id));
@@ -64,10 +67,18 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/tasks")
+      .get("http://localhost:8080/tasks?perPage=" + perPage)
       .then((res) => setTasks(res.data.data.results))
       .catch((err) => console.log(err));
-  }, []);
+  }, [perPage]);
+
+  const handleScroll = (e) => {
+    const bottom =
+      e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) {
+      setPerPage(perPage + 5);
+    }
+  };
 
   return (
     <>
@@ -85,8 +96,13 @@ const App = () => {
           </Panel>
           <ResizeHandle />
         </>
-        <Panel className={styles.Panel} collapsible={true} order={2}>
-          <Stack.Item grow styles={taskListStyles}>
+        <Panel
+          ref={taskListRef}
+          className={styles.Panel}
+          collapsible={true}
+          order={2}
+        >
+          <Stack.Item grow styles={taskListStyles} onScroll={handleScroll}>
             <TaskList tasks={tasks} onSelected={onSelected} />
           </Stack.Item>
         </Panel>
