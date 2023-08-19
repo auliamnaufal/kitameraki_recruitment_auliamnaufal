@@ -2,6 +2,7 @@ const {
   getAllTasksHandler,
   addTaskHandler,
   editTaskByIdHandler,
+  deleteTaskByIdHandler,
 } = require("./handler");
 
 const routes = [
@@ -19,6 +20,11 @@ const routes = [
     method: "PATCH",
     path: "/tasks/{id}",
     handler: editTaskByIdHandler,
+  },
+  {
+    method: "DELETE",
+    path: "/tasks/{id}",
+    handler: deleteTaskByIdHandler,
   },
 ];
 

@@ -41,7 +41,13 @@ const App = () => {
   };
 
   const onDelete = (id: any) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    axios
+      .delete("http://localhost:8080/tasks/" + id)
+      .then((res) => {
+        setTasks(tasks.filter((task) => task.id !== id));
+      })
+      .catch((err) => console.log(err));
+
     setSelectedTask(undefined);
   };
 

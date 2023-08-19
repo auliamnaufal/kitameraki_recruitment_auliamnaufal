@@ -104,8 +104,32 @@ const editTaskByIdHandler = (request, h) => {
   return response;
 };
 
+const deleteTaskByIdHandler = (request, h) => {
+  const { id } = request.params;
+
+  const taskIndex = tasks.findIndex((task) => task.id === id);
+
+  if (taskIndex !== -1) {
+    tasks.splice(taskIndex, 1);
+    const response = h.response({
+      status: "success",
+      message: "Task berhasil dihapus",
+    });
+    response.code(200);
+    return response;
+  }
+
+  const response = h.response({
+    status: "fail",
+    message: "Task gagal dihapus. Id tidak ditemukan",
+  });
+  response.code(404);
+  return response;
+};
+
 module.exports = {
   getAllTasksHandler,
   addTaskHandler,
   editTaskByIdHandler,
+  deleteTaskByIdHandler,
 };
