@@ -1,4 +1,8 @@
-const { getAllTasksHandler, addTaskHandler } = require("./handler");
+const {
+  getAllTasksHandler,
+  addTaskHandler,
+  editTaskByIdHandler,
+} = require("./handler");
 
 const routes = [
   {
@@ -10,6 +14,11 @@ const routes = [
     method: "POST",
     path: "/tasks",
     handler: addTaskHandler,
+  },
+  {
+    method: "PATCH",
+    path: "/tasks/{id}",
+    handler: editTaskByIdHandler,
   },
 ];
 

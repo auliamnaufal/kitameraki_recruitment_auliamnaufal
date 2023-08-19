@@ -46,7 +46,14 @@ const App = () => {
   };
 
   const onTaskUpdate = (data: Task) => {
-    setTasks(tasks.map((task) => (task.id === data.id ? data : task)));
+    axios
+      .patch("http://localhost:8080/tasks/" + data.id, data)
+      .then((res) =>
+        setTasks(
+          tasks.map((task) => (task.id === data.id ? res.data.data : task))
+        )
+      )
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {

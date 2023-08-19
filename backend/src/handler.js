@@ -61,7 +61,51 @@ const addTaskHandler = (request, h) => {
   return response;
 };
 
+const editTaskByIdHandler = (request, h) => {
+  const { id } = request.params;
+
+  const { title, description } = request.payload;
+
+  if (!title) {
+    const response = h.response({
+      status: "fail",
+      message: "Gagal memperbarui task. Mohon isi nama task",
+    });
+    response.code(400);
+    return response;
+  }
+
+  const taskIndex = tasks.findIndex((task) => task.id === id);
+
+  if (taskIndex !== -1) {
+    tasks[taskIndex] = {
+      ...tasks[taskIndex],
+      title,
+      description,
+    };
+    const response = h.response({
+      status: "success",
+      message: "Task berhasil diperbarui",
+      data: {
+        id: id,
+        title: title,
+        description: description,
+      },
+    });
+    response.code(200);
+    return response;
+  }
+
+  const response = h.response({
+    status: "fail",
+    message: "Gagal memperbarui task. Id tidak ditemukan",
+  });
+  response.code(404);
+  return response;
+};
+
 module.exports = {
   getAllTasksHandler,
   addTaskHandler,
+  editTaskByIdHandler,
 };
