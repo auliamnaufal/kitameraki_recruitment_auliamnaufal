@@ -20,6 +20,7 @@ const TaskDetail = ({ task, onDelete, fields, onUpdate }: Props) => {
   const formMethods = useForm();
   const {
     handleSubmit,
+    reset,
     formState: { isSubmitting, errors },
   } = formMethods;
 
@@ -63,7 +64,13 @@ const TaskDetail = ({ task, onDelete, fields, onUpdate }: Props) => {
       <Text variant="medium">{task?.description}</Text>
       {task && (
         <Stack horizontal gap={20} style={{ marginTop: "20px" }}>
-          <PrimaryButton text="Update" onClick={() => setUpdate(true)} />
+          <PrimaryButton
+            text="Update"
+            onClick={() => {
+              setUpdate(true);
+              reset();
+            }}
+          />
           <PrimaryButton
             text="Delete"
             theme={dangerButtonTheme}

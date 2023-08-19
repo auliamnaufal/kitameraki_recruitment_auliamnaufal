@@ -4,8 +4,6 @@ const tasks = require("./task");
 const getAllTasksHandler = (request, h) => {
   const { perPage } = request.query;
 
-  console.log(perPage);
-
   let slicedTasks = tasks;
 
   if (perPage) {

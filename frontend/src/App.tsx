@@ -4,9 +4,7 @@ import TaskList from "./components/TaskList/TaskList";
 import { useEffect, useRef, useState } from "react";
 import TaskDetail from "./components/TaskDetail/TaskDetail";
 import {
-  innerStackTokens,
   nonShrinkingStackItemStyles,
-  stackStyles,
   taskDetailStyles,
   taskListStyles,
 } from "./AppStyles";
@@ -27,7 +25,6 @@ const App = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [selectedTask, setSelectedTask] = useState<Task | undefined>(undefined);
   const [perPage, setPerPage] = useState(10);
-  const [prevY, setPrevY] = useState(0);
   const taskListRef = useRef(null);
 
   const onSelected = (id: number) => {
