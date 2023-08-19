@@ -31,7 +31,7 @@ const TaskDetail = ({ task, onDelete, fields, onUpdate }: Props) => {
           onUpdate({ ...data, id: task.id });
           setUpdate(false);
         })}
-        style={{ width: "100%" }}
+        style={{ width: "90%" }}
       >
         <FormProvider {...formMethods}>
           {fields.map((d, i) => (
