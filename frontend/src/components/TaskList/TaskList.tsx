@@ -11,7 +11,7 @@ const TaskList = ({ tasks, onSelected }: Props) => {
   return (
     <FocusZone
       direction={FocusZoneDirection.vertical}
-      style={{ maxWidth: 500, width: "100%" }}
+      style={{ width: "100%" }}
     >
       <div>
         {tasks.map((item) => (

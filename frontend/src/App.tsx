@@ -13,6 +13,9 @@ import {
 import { SubmitHandler } from "react-hook-form";
 import { fields } from "./components/TaskForm/TaskFormData";
 import axios from "axios";
+import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
+import ResizeHandle from "./components/ResizeHandle";
+import styles from "./components/style.module.css";
 
 export interface Task {
   id: number;
@@ -48,27 +51,47 @@ const App = () => {
   }, []);
 
   return (
-    <Stack
-      enableScopedSelectors
-      horizontal
-      styles={stackStyles}
-      tokens={innerStackTokens}
-    >
-      <Stack.Item disableShrink styles={nonShrinkingStackItemStyles}>
-        <TaskForm fields={fields} onSubmit={onSubmit} />
-      </Stack.Item>
-      <Stack.Item grow styles={taskListStyles}>
-        <TaskList tasks={tasks} onSelected={onSelected} />
-      </Stack.Item>
-      <Stack.Item grow styles={taskDetailStyles}>
-        <TaskDetail
-          onDelete={onDelete}
-          task={selectedTask}
-          fields={fields}
-          onUpdate={onTaskUpdate}
-        />
-      </Stack.Item>
-    </Stack>
+    <>
+      <PanelGroup direction="horizontal">
+        <>
+          <Panel
+            className={styles.Panel}
+            collapsible={true}
+            defaultSize={25}
+            order={1}
+          >
+            <Stack.Item disableShrink styles={nonShrinkingStackItemStyles}>
+              <TaskForm fields={fields} onSubmit={onSubmit} />
+            </Stack.Item>
+          </Panel>
+          <ResizeHandle />
+        </>
+        <Panel className={styles.Panel} collapsible={true} order={2}>
+          <Stack.Item grow styles={taskListStyles}>
+            <TaskList tasks={tasks} onSelected={onSelected} />
+          </Stack.Item>
+        </Panel>
+        <>
+          <ResizeHandle />
+          <Panel
+            className={styles.Panel}
+            collapsible={true}
+            defaultSize={35}
+            minSize={35}
+            order={3}
+          >
+            <Stack.Item grow styles={taskDetailStyles}>
+              <TaskDetail
+                onDelete={onDelete}
+                task={selectedTask}
+                fields={fields}
+                onUpdate={onTaskUpdate}
+              />
+            </Stack.Item>
+          </Panel>
+        </>
+      </PanelGroup>
+    </>
   );
 };
 

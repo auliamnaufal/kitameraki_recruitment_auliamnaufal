@@ -23,7 +23,7 @@ const TaskForm = ({ fields, onSubmit }: Props) => {
         onSubmit(data);
         reset();
       })}
-      style={{ width: "100%" }}
+      style={{ width: "90%" }}
     >
       <FormProvider {...formMethods}>
         {fields.map((d, i) => (
