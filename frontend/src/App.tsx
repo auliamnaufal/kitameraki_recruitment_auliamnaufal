@@ -32,7 +32,12 @@ const App = () => {
   };
 
   const onSubmit: SubmitHandler<Task> = (data) => {
-    setTasks([...tasks, { ...data, id: Math.random() }]);
+    axios
+      .post("http://localhost:8080/tasks", data)
+      .then((res) => setTasks([...tasks, { ...res.data.data }]))
+      .catch((err) => console.log(err));
+
+    // setTasks([...tasks, { ...data }]);
   };
 
   const onDelete = (id: any) => {
@@ -46,8 +51,9 @@ const App = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/tasks")
-      .then((res) => setTasks(res.data.data.results));
+      .get("http://localhost:8080/tasks")
+      .then((res) => setTasks(res.data.data.results))
+      .catch((err) => console.log(err));
   }, []);
 
   return (
