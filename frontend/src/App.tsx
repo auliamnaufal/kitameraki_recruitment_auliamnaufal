@@ -60,6 +60,8 @@ const App = () => {
         )
       )
       .catch((err) => console.log(err));
+
+    setSelectedTask(data);
   };
 
   useEffect(() => {
@@ -71,7 +73,8 @@ const App = () => {
 
   const handleScroll = (e) => {
     const bottom =
-      e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+      e.target.scrollHeight - e.target.scrollTop ===
+      e.target.clientHeight + 100;
     if (bottom) {
       setPerPage(perPage + 5);
     }
