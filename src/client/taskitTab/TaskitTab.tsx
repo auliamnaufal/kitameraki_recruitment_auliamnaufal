@@ -12,12 +12,18 @@ import TaskForm from "./components/TaskForm/TaskForm";
 import TaskList from "./components/TaskList/TaskList";
 import { useEffect, useRef, useState } from "react";
 import TaskDetail from "./components/TaskDetail/TaskDetail";
+import {
+  nonShrinkingStackItemStyles,
+  taskDetailStyles,
+  taskListStyles,
+} from "./AppStyles";
 import { SubmitHandler } from "react-hook-form";
 import { fields } from "./components/TaskForm/TaskFormData";
 import axios from "axios";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import ResizeHandle from "./components/ResizeHandle";
 // import styles from "./components/style.module.css";
+import { Stack } from "@fluentui/react";
 
 /**
  * Implementation of the Taskit Tab content page
@@ -109,44 +115,56 @@ export const TaskitTab = () => {
       <PanelGroup direction="horizontal">
         <>
           <Panel
-            // className={styles.Panel}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+            }}
             collapsible={true}
             defaultSize={25}
             order={1}
           >
-            <Flex>
+            <Stack.Item disableShrink styles={nonShrinkingStackItemStyles}>
               <TaskForm fields={fields} onSubmit={onSubmit} />
-            </Flex>
+            </Stack.Item>
           </Panel>
           <ResizeHandle />
         </>
         <Panel
           ref={taskListRef}
-        //   className={styles.Panel}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            width: "100%",
+          }}
           collapsible={true}
           order={2}
         >
-          <Flex onScroll={handleScroll}>
+          <Stack.Item grow styles={taskListStyles} onScroll={handleScroll}>
             <TaskList tasks={tasks} onSelected={onSelected} />
-          </Flex>
+          </Stack.Item>
         </Panel>
         <>
           <ResizeHandle />
           <Panel
-            // className={styles.Panel}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+            }}
             collapsible={true}
             defaultSize={35}
             minSize={35}
             order={3}
           >
-            <Flex>
+            <Stack.Item grow styles={taskDetailStyles}>
               <TaskDetail
                 onDelete={onDelete}
                 task={selectedTask}
                 fields={fields}
                 onUpdate={onTaskUpdate}
               />
-            </Flex>
+            </Stack.Item>
           </Panel>
         </>
       </PanelGroup>

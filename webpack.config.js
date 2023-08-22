@@ -1,4 +1,4 @@
-// Copyright (c) Wictor Wilén. All rights reserved. 
+// Copyright (c) Wictor Wilén. All rights reserved.
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT license.
 
@@ -14,114 +14,127 @@ const argv = require("yargs").argv;
 const debug = argv.debug !== undefined;
 const lint = !(argv["no-linting"] || argv.l === true);
 
-const config = [{
+const config = [
+  {
     entry: {
-        server: [
-            path.join(__dirname, "/src/server/server.ts")
-        ]
+      server: [path.join(__dirname, "/src/server/server.ts")],
     },
     mode: debug ? "development" : "production",
     output: {
-        path: path.join(__dirname, "/dist"),
-        filename: "[name].js",
-        devtoolModuleFilenameTemplate: debug ? "[absolute-resource-path]" : "[]"
+      path: path.join(__dirname, "/dist"),
+      filename: "[name].js",
+      devtoolModuleFilenameTemplate: debug ? "[absolute-resource-path]" : "[]",
     },
     externals: [nodeExternals()],
     devtool: debug ? "source-map" : "source-map",
     resolve: {
-        extensions: [".ts", ".tsx", ".js"],
-        alias: {}
+      extensions: [".ts", ".tsx", ".js"],
+      alias: {},
     },
     target: "node",
     node: {
-        __dirname: false,
-        __filename: false
+      __dirname: false,
+      __filename: false,
     },
     module: {
-        rules: [{
-            test: /\.tsx?$/,
-            exclude: /node_modules/,
-            use: {
-                loader: "ts-loader",
-                options: {
-                    transpileOnly: true
-                }
-            }
-        }]
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+            },
+          },
+        },
+        {
+          test: /\.css$/i,
+          use: ["css-loader"],
+        },
+      ],
     },
     plugins: [
-        new ForkTsCheckerWebpackPlugin({
-            typescript: {
-                configFile: "./src/server/tsconfig.json"
-            }
-        })
-    ]
-},
-{
+      new ForkTsCheckerWebpackPlugin({
+        typescript: {
+          configFile: "./src/server/tsconfig.json",
+        },
+      }),
+    ],
+  },
+  {
     entry: {
-        client: [
-            path.join(__dirname, "/src/client/client.ts")
-        ]
+      client: [path.join(__dirname, "/src/client/client.ts")],
     },
     mode: debug ? "development" : "production",
     output: {
-        path: path.join(__dirname, "/dist/web/scripts"),
-        filename: "[name].js",
-        libraryTarget: "umd",
-        library: "taskit",
-        publicPath: "/scripts/"
+      path: path.join(__dirname, "/dist/web/scripts"),
+      filename: "[name].js",
+      libraryTarget: "umd",
+      library: "taskit",
+      publicPath: "/scripts/",
     },
     externals: {},
     devtool: debug ? "source-map" : "source-map",
     resolve: {
-        extensions: [".ts", ".tsx", ".js"],
-        alias: {}
+      extensions: [".ts", ".tsx", ".js"],
+      alias: {},
     },
     target: "web",
     module: {
-        rules: [{
-            test: /\.tsx?$/,
-            exclude: /node_modules/,
-            use: {
-                loader: "ts-loader",
-                options: {
-                    transpileOnly: true
-                }
-            }
-        }]
+      rules: [
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+            },
+          },
+        },
+        {
+          test: /\.css$/i,
+          use: ["css-loader"],
+        },
+      ],
     },
     plugins: [
-        new webpack.EnvironmentPlugin({ PUBLIC_HOSTNAME: undefined, TAB_APP_ID: null, TAB_APP_URI: null }),
-        new ForkTsCheckerWebpackPlugin({
-            typescript: {
-                configFile: "./src/client/tsconfig.json"
-            }
-        })
+      new webpack.EnvironmentPlugin({
+        PUBLIC_HOSTNAME: undefined,
+        TAB_APP_ID: null,
+        TAB_APP_URI: null,
+      }),
+      new ForkTsCheckerWebpackPlugin({
+        typescript: {
+          configFile: "./src/client/tsconfig.json",
+        },
+      }),
     ],
     devServer: {
-        hot: false,
-        host: "localhost",
-        port: 9000,
-        allowedHosts: "all",
-        client: {
-            overlay: {
-                warnings: false,
-                errors: true
-            }
+      hot: false,
+      host: "localhost",
+      port: 9000,
+      allowedHosts: "all",
+      client: {
+        overlay: {
+          warnings: false,
+          errors: true,
         },
-        devMiddleware: {
-            writeToDisk: true,
-            stats: {
-                all: false,
-                colors: true,
-                errors: true,
-                warnings: true,
-                timings: true,
-                entrypoints: true
-            }
-        }
-    }
-}
+      },
+      devMiddleware: {
+        writeToDisk: true,
+        stats: {
+          all: false,
+          colors: true,
+          errors: true,
+          warnings: true,
+          timings: true,
+          entrypoints: true,
+        },
+      },
+    },
+  },
 ];
 
 module.exports = config;

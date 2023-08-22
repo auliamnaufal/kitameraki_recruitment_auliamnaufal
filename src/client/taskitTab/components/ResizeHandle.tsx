@@ -13,13 +13,39 @@ export default function ResizeHandle({
   return (
     <PanelResizeHandle
       // className={[styles.ResizeHandleOuter, className].join(" ")}
+      style={{
+        flex: "0 0 1.5em",
+        position: "relative",
+        outline: "none",
+        backgroundColor: "transparent",
+      }}
       id={id}
     >
       <div
-      // className={styles.ResizeHandleInner}
+        // className={styles.ResizeHandleInner}
+        style={{
+          position: "absolute",
+          top: "50%",
+          transform: "translateY(-50%)",
+          bottom: "0.25em",
+          left: "0.25em",
+          right: "0.25em",
+          height: "20%",
+          borderRadius: "0.25em",
+          backgroundColor: "var(--background-color)",
+          transition: "background-color 0.2s linear",
+        }}
       >
         <svg
-        // className={styles.Icon} viewBox="0 0 24 24"
+          style={{
+            width: "1em",
+            height: "1em",
+            position: "absolute",
+            transform: "rotate(90deg)",
+            left: "calc(50% - 0.5rem)",
+            top: "calc(50% - 0.5rem)",
+          }}
+          viewBox="0 0 24 24"
         >
           <path
             fill="currentColor"

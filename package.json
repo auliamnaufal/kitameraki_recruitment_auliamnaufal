@@ -9,7 +9,9 @@
     "debug": "gulp serve --debug"
   },
   "dependencies": {
+    "@fluentui/react": "^8.110.13",
     "@fluentui/react-northstar": "~0.62.0",
+    "@hookform/error-message": "^2.0.1",
     "@microsoft/teams-js": "^2.0.0",
     "axios": "^0.27.2",
     "botbuilder": "~4.16.0",
@@ -25,9 +27,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-hook-form": "^7.45.4",
-    "react-resizable-panels": "^0.0.55",
-    "@fluentui/react": "^8.110.13",
-    "@hookform/error-message": "^2.0.1"
+    "react-resizable-panels": "^0.0.55"
   },
   "devDependencies": {
     "@types/debug": "4.1.7",
@@ -37,6 +37,7 @@
     "@types/react": "16.8.10",
     "@types/react-dom": "^16.9.7",
     "browser-sync": "^2.26.5",
+    "css-loader": "^6.8.1",
     "fancy-log": "^2.0.0",
     "file-loader": "~6.2.0",
     "fork-ts-checker-webpack-plugin": "~7.2.11",
