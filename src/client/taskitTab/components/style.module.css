@@ -1,4 +1,4 @@
-/* :root {
+:root {
   --color-panel-background: #192230;
   --color-panel-background-alternate: #202124;
   --color-solid-resize-bar: #454950;
@@ -69,4 +69,4 @@
   transform: rotate(90deg);
   left: calc(50% - 0.5rem);
   top: calc(50% - 0.5rem);
-} */
+}

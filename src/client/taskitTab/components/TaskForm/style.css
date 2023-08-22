@@ -1,0 +1,36 @@
+/* .custom-input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.custom-input label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #323130;
+}
+
+.custom-input input,
+.custom-input textarea {
+  font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI",
+    -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  box-shadow: none;
+  margin: 0px;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  border: 1px solid rgb(96, 94, 92);
+  border-radius: 2px;
+  background: rgb(255, 255, 255);
+  cursor: text;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  position: relative;
+}
+
+.custom-input input:focus,
+.custom-input textarea:focus {
+  outline: none;
+  border-color: #0078d4;
+} */

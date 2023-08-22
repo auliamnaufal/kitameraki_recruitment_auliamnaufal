@@ -1,0 +1,49 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.13/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.13",
+  "id": "1f3f0380-40ac-11ee-b76d-bbb226ffa3dc",
+  "version": "0.0.1",
+  "packageName": "taskit",
+  "developer": {
+    "name": "auliamnaufal",
+    "websiteUrl": "https://taskit.azurewebsites.net",
+    "privacyUrl": "https://taskit.azurewebsites.net/privacy.html",
+    "termsOfUseUrl": "https://taskit.azurewebsites.net/tou.html"
+  },
+  "name": {
+    "short": "Taskit",
+    "full": "Taskit"
+  },
+  "description": {
+    "short": "TODO: add short description here",
+    "full": "TODO: add full description here"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#D85028",
+  "configurableTabs": [],
+  "staticTabs": [
+    {
+      "entityId": "b3fa0b4b-0c3d-4380-934f-ad2ba9ecc443",
+      "name": "Taskit Tab",
+      "contentUrl": "https://taskit.azurewebsites.net/taskitTab/?name={loginHint}&tenant={tid}&theme={theme}",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "bots": [],
+  "connectors": [],
+  "composeExtensions": [],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "taskit.azurewebsites.net"
+  ],
+  "showLoadingIndicator": true,
+  "isFullScreen": false
+}
